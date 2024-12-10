@@ -2,11 +2,11 @@ pipeline {
     agent any
 
     environment {
-        CLIENT_ID = '123e4567-e89b-12d3-a456-426614174001'
-        CLIENT_SECRET = '7a91d1c9-2583-4ef6-8907-7c974f1d6a0e'
-        APPLICATION_ID = '673413da502d06461c39d283'
-        SCA_API_URL = 'https://appsecops-api.intruceptlabs.com/api/v1/integrations/sca-scans'
-        SAST_API_URL = 'https://appsecops-api.intruceptlabs.com/api/v1/integrations/sast-scans'
+        CLIENT_ID = '123askjdb01'
+        CLIENT_SECRET = ';slkfdvn32e'
+        APPLICATION_ID = 's35deg4345'
+        SCA_API_URL = 'https://acbhs.com/integrations/sca-scans'
+        SAST_API_URL = 'https://acbhs.com/integrations/sast-scans'
     }
 
     stages {
@@ -44,7 +44,7 @@ pipeline {
                 script {
                     def response = sh(script: """
                         #!/bin/bash
-                        curl -v -X POST \
+                        curl --http1.1 -v -X POST \
                         -H "Client-ID: ${CLIENT_ID}" \
                         -H "Client-Secret: ${CLIENT_SECRET}" \
                         -F "projectZipFile=@project.zip" \
@@ -85,7 +85,7 @@ pipeline {
                 script {
                     def response = sh(script: """
                         #!/bin/bash
-                        curl -v -X POST \
+                        curl --http1.1 -v -X POST \
                         -H "Client-ID: ${CLIENT_ID}" \
                         -H "Client-Secret: ${CLIENT_SECRET}" \
                         -F "projectZipFile=@project.zip" \

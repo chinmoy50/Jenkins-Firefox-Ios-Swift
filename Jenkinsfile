@@ -6,7 +6,7 @@ pipeline {
         CLIENT_SECRET = '7a91d1c9-2583-4ef6-8907-7c974f1d6a0e'
         APPLICATION_ID = '673413da502d06461c39d283'
         SCA_API_URL = 'https://appsecops-api.intruceptlabs.com/api/v1/integrations/sca-scans'
-        SAST_API_URL = 'https://appsecops-api.intruceptlabs.com/api/v1/integrations/sca-scans'
+        SAST_API_URL = 'https://appsecops-api.intruceptlabs.com/api/v1/integrations/sast-scans'
     }
 
     stages {

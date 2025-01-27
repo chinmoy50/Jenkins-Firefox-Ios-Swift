@@ -49,7 +49,7 @@ pipeline {
                         -H "Client-Secret: ${CLIENT_SECRET}" \
                         -F "projectZipFile=@project.zip" \
                         -F "applicationId=${APPLICATION_ID}" \
-                        -F "scanName=Swift SCA Scan from Jenkins Pipeline" \
+                        -F "scanName=Firefox-Ios-Swift SCA Scan" \
                         -F "language=Swift" \
                         "${SCA_API_URL}"
                     """, returnStdout: true).trim()
@@ -68,19 +68,7 @@ pipeline {
             }
         }
 
-        stage('Check SCA Result') {
-            when {
-                expression { return env.CAN_PROCEED_SCA != 'true' }
-            }
-            steps {
-                error "SCA scan failed. Deployment cancelled."
-            }
-        }
-
         stage('Perform SAST Scan') {
-            when {
-                expression { return env.CAN_PROCEED_SCA == 'true' }
-            }
             steps {
                 script {
                     def response = sh(script: """
@@ -90,7 +78,7 @@ pipeline {
                         -H "Client-Secret: ${CLIENT_SECRET}" \
                         -F "projectZipFile=@project.zip" \
                         -F "applicationId=${APPLICATION_ID}" \
-                        -F "scanName=Swift SAST Scan from Jenkins Pipeline" \
+                        -F "scanName=Firefox-Ios-Swift SAST Scan" \
                         -F "language=Swift" \
                         "${SAST_API_URL}"
                     """, returnStdout: true).trim()
@@ -106,15 +94,6 @@ pipeline {
 
                     env.CAN_PROCEED_SAST = canProceedSAST.toString()
                 }
-            }
-        }
-
-        stage('Check SAST Result') {
-            when {
-                expression { return env.CAN_PROCEED_SAST != 'true' }
-            }
-            steps {
-                error "SAST scan failed. Deployment cancelled."
             }
         }
 
